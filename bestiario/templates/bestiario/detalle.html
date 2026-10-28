@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block titulo %}{{ criatura.nombre }}{% endblock %}
+
+{% block contenido %}
+    <h2>{{ criatura.nombre }}</h2>
+    <span class="tipo">{{ criatura.get_tipo_display }}</span>
+    <span class="nivel nivel-{{ criatura.nivel_peligro|lower }}">Peligro {{ criatura.nivel_peligro }}</span>
+
+    <ul class="datos">
+        <li>Habitat: {{ criatura.habitat.nombre }} (clima {{ criatura.habitat.clima|lower }})</li>
+        <li>Tamaño: {{ criatura.tamano_cm }} cm</li>
+        <li>Peligro: {{ criatura.peligro }} de 10</li>
+        <li>Domesticable: {{ criatura.domesticable|yesno:"Si,No" }}</li>
+    </ul>
+
+    {{ criatura.descripcion|default:"Sin descripcion."|linebreaks }}
+
+    {% if criatura.peligro >= 8 %}
+        <p class="aviso">Cuidado: no te acerques sin escolta.</p>
+    {% endif %}
+
+    <a href="{% url 'bestiario:inicio' %}?habitat={{ criatura.habitat.id }}" class="boton">Mas criaturas de {{ criatura.habitat.nombre }}</a>
+    <a href="{% url 'bestiario:inicio' %}" class="boton">Volver al bestiario</a>
+{% endblock %}

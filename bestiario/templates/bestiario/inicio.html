@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Criaturas - Bestiario de Mobius{% endblock %}
+
+{% block contenido %}
+    <form method="get" class="filtros">
+        <input type="text" name="q" value="{{ q }}" placeholder="Buscar criatura">
+        <select name="habitat">
+            <option value="">Todos los habitats</option>
+            {% for h in habitats %}
+                <option value="{{ h.id }}" {% if habitat_sel == h.id|stringformat:"d" %}selected{% endif %}>{{ h.nombre }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Buscar</button>
+        <a href="{% url 'bestiario:inicio' %}">Limpiar</a>
+    </form>
+
+    <p class="resumen">Criaturas encontradas: <strong>{{ criaturas|length }}</strong></p>
+
+    <div class="lista">
+    {% for c in criaturas %}
+        <div class="tarjeta">
+            <span class="tipo">{{ c.get_tipo_display }}</span>
+            <span class="nivel nivel-{{ c.nivel_peligro|lower }}">Peligro {{ c.nivel_peligro }}</span>
+            <h2>{{ c.nombre }}</h2>
+            <p>{{ c.habitat.nombre }} · {{ c.tamano_cm }} cm</p>
+            <p>{{ c.descripcion|truncatewords:8 }}</p>
+            <a href="{% url 'bestiario:detalle' c.id %}">Ver ficha</a>
+        </div>
+    {% empty %}
+        <p>Todavia no hay criaturas cargadas.</p>
+    {% endfor %}
+    </div>
+{% endblock %}

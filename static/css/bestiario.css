@@ -1,0 +1,134 @@
+body {
+    background-color: #101a33;
+    color: #e8ecff;
+    font-family: 'Trebuchet MS', sans-serif;
+    margin: 0;
+}
+
+header {
+    background-color: #0a1124;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 4px solid #ff7a59;
+}
+
+header h1 {
+    color: #ff7a59;
+    margin: 0 0 10px 0;
+}
+
+nav a {
+    color: #e8ecff;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #ff7a59;
+}
+
+main {
+    max-width: 960px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.filtros input,
+.filtros select,
+.filtros button {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+}
+
+.filtros button {
+    background-color: #ff7a59;
+    color: #0a1124;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.filtros a {
+    color: #e8ecff;
+    align-self: center;
+}
+
+.resumen {
+    background-color: #1b2a52;
+    padding: 10px 14px;
+    border-radius: 6px;
+}
+
+.lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.tarjeta {
+    background-color: #1b2a52;
+    border-radius: 10px;
+    padding: 18px;
+    width: 270px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.tarjeta h2 {
+    color: #ff7a59;
+    font-size: 1.15rem;
+    margin-top: 10px;
+}
+
+.tarjeta a,
+.boton {
+    display: inline-block;
+    margin-top: 8px;
+    background-color: #ff7a59;
+    color: #0a1124;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.tipo,
+.nivel {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #0a1124;
+}
+
+.tipo { background-color: #8fd3ff; }
+.nivel-bajo { background-color: #75d9a3; }
+.nivel-medio { background-color: #ffd166; }
+.nivel-alto { background-color: #ff8a8a; }
+
+.datos {
+    list-style: none;
+    padding: 0;
+}
+
+.datos li {
+    background-color: #1b2a52;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.aviso {
+    background-color: #5c1f1f;
+    color: #ffb3b3;
+    padding: 12px;
+    border-radius: 6px;
+}
