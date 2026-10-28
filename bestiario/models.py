@@ -47,3 +47,24 @@ class Criatura(models.Model):
         if self.peligro >=4:
             return "Medio"
         return "Bajo"
+
+class Avistamiento(models.Model):
+    criatura = models.ForeignKey(
+        Criatura,
+        on_delete=models.PROTECT,
+        related_name='avistamientos',
+    )
+    nombre = models.CharField(max_length=80)
+    email = models.EmailField()
+    fecha = models.DateField()
+    cantidad = models.PositiveIntegerField(default=1)
+    lugar = models.CharField(max_length=100)
+    comentario = models.TextField(blank=True)
+    atendido = models.BooleanField(default=False)
+    creada = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-creada']
+
+    def __str__(self):
+        return f"{self.nombre} vio {self.criatura} el {self.fecha}"

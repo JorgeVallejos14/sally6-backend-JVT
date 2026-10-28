@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Habitat, Criatura
+from .models import Habitat, Criatura, Avistamiento
 
 # Register your models here.
 admin.site.site_header = "Administracion del Bestiario"
@@ -61,3 +61,20 @@ class CriaturaAdmin(admin.ModelAdmin):
     def ocultar(self, request, queryset):
         n = queryset.update(visible=False)
         self.message_user(request, f"{n} criaturas ocultadas del sitio")
+
+@admin.register(Avistamiento)
+class AvistamientoAdmin(admin.ModelAdmin):
+    list_display = ('criatura', 'nombre', 'email', 'fecha', 'cantidad',
+                    'lugar', 'atendido', 'creada')
+    list_filter = ('atendido', 'criatura', 'fecha')
+    search_fields = ('nombre', 'lugar', 'comentario')
+    list_editable = ('atendido',)
+    list_select_related = ('criatura',)
+    date_hierarchy = 'creada'
+    readonly_fields = ('creada',)
+    actions = ['marcar_atendido']
+
+    @admin.action(description="Marcar como atendidos")
+    def marcar_atendido(self, request, queryset):
+        n = queryset.update(atendido=True)
+        self.message_user(request, f"{n} avistamientos marcados como atendidos")
