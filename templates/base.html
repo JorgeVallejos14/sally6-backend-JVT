@@ -12,10 +12,17 @@
         <h1>Bestiario de Mobius</h1>
         <nav>
             <a href="{% url 'bestiario:inicio' %}">Criaturas</a>
+            <a href="{% url 'bestiario:reportar' %}">Reportar avistamiento</a>
             <a href="{% url 'admin:index' %}">Panel</a>
         </nav>
     </header>
     <main>
+        {% if messages %}
+            {% for m in messages %}
+                <p class="mensaje">{{ m }}</p>
+            {% endfor %}
+        {% endif %}
+
         {% block contenido %}{% endblock %}
     </main>
 </body>

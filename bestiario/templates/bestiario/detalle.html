@@ -22,4 +22,5 @@
 
     <a href="{% url 'bestiario:inicio' %}?habitat={{ criatura.habitat.id }}" class="boton">Mas criaturas de {{ criatura.habitat.nombre }}</a>
     <a href="{% url 'bestiario:inicio' %}" class="boton">Volver al bestiario</a>
+    <a href="{% url 'bestiario:reportar' %}?criatura={{ criatura.id }}" class="boton">Reportar un avistamiento</a>
 {% endblock %}

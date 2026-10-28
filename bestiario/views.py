@@ -1,4 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.contrib import messages
+from django.shortcuts import render, get_object_or_404, redirect
+from .forms import AvistamientoForm
 from .models import Criatura, Habitat
 
 # Create your views here.
@@ -27,4 +29,24 @@ def detalle(request, id):
         id=id,
         visible=True,
     )
-    return render(request, 'bestiario/detalle.html', {'criatura': criatura}) 
+    return render(request, 'bestiario/detalle.html', {'criatura': criatura})
+
+def reportar(request):
+    if request.method == "POST":
+        form = AvistamientoForm(request.POST)
+        if form.is_valid():
+            avistamiento = form.save()
+            messages.success(
+                request,
+                f"Gracias {avistamiento.nombre}, tu avistamiento de "
+                f"{avistamiento.criatura} quedo registrado.",
+            )
+            return redirect("bestiario:inicio")
+    else:
+        inicial = {}
+        criatura_id = request.GET.get("criatura", "")
+        if criatura_id.isdigit():
+            inicial["criatura"] = int(criatura_id)
+        form = AvistamientoForm(initial=inicial)
+
+    return render(request, "bestiario/reportar.html", {"form": form})

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Reportar avistamiento{% endblock %}
+
+{% block contenido %}
+    <h2>Reportar un avistamiento</h2>
+    <p>Cuentanos que criatura viste y donde. Sally revisara tu reporte.</p>
+
+    <form method="post" novalidate class="formulario">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        {% for campo in form %}
+        <p>
+            {{ campo.label_tag }}
+            {{ campo }}
+            {{ campo.errors }}
+        </p>
+        {% endfor %}
+
+        <button type="submit">Enviar reporte</button>
+        <a href="{% url 'bestiario:inicio' %}">Cancelar</a>
+    </form>
+{% endblock %}
